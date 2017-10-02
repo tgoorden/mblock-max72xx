@@ -1,0 +1,91 @@
+{   
+   "extensionName": "MAX72xx",
+   "description": "Extension for MAX72xx LED panels (MAX7219/MAX7221)",
+   "version": "1.0",
+   "author": "Thomas Goorden (thomas.goorden@gmail.com)",
+   "homepage": "https://github.com/tgoorden/mblock-max72xx",
+   "sort":0,
+   "javascriptURL":"",
+   "firmware":"1.2",
+   "extensionPort":0,
+   "blockSpecs": [
+      [
+         "w",
+         "init LED panel: DIN %n , CS %n , CLK %n",
+         "initLED",
+         "7",
+         "6",
+         "5",
+         {
+            "setup":"// wake up led\nled.shutdown(0,false);\n// medium brightness\nled.setIntensity(0,8);\n// clear display\nled.clearDisplay(0);\n",
+            "inc":"#include \"LedControl.h\"\n",
+            "def":"LedControl led = LedControl({0},{2},{1});\n",
+            "work":"",
+            "loop":""
+         }
+      ],
+      [
+         "w",
+         "set LED intensity to %n",
+         "setIntensity",
+         "0.8",
+         {
+            "setup":"",
+            "inc":"",
+            "def":"",
+            "work":"led.setIntensity(0,{1});\n",
+            "loop":""
+         }
+      ],
+      [
+         "w",
+         "turn %d.status LED row %n column %n",
+         "setLed",
+         "on",
+         "0",
+         "0",
+         {
+            "setup":"",
+            "inc":"",
+            "def":"",
+            "work":"led.setLed(0,{1},{2},{0});\n",
+            "loop":""
+         }
+      ],
+      [
+         "w",
+         "clear LED panel",
+         "clearLED",
+         {
+            "setup":"",
+            "inc":"",
+            "def":"",
+            "work":"led.clearDisplay(0);\n",
+            "loop":""
+         }
+      ],
+      [
+         "w",
+         "BE COOL",
+         "beCool",
+         {
+            "setup":"",
+            "inc":"",
+            "def":"byte becool[8] = {B00111100,B01000010,B10010011,B10000111,B10011111,B10111011,B01111110,B00111100};\n",
+            "work":"for(int i=0;i<8;i++){\nled.setRow(0,i,becool[i]);\n};\n",
+            "loop":""
+         }
+      ]
+   ],
+   "menus": {
+      "status": ["on","off"]
+   },
+   "values":{
+      "on":true,
+      "off":false
+   },
+   "translators":{
+      "nl_NL": {
+      }
+   }
+}
