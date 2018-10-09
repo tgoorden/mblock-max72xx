@@ -33,7 +33,7 @@
             "setup":"",
             "inc":"",
             "def":"",
-            "work":"led.setIntensity(0,{1});\n",
+            "work":"led.setIntensity(0,{0});\n",
             "loop":""
          }
       ],
